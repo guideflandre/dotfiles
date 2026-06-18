@@ -1,0 +1,297 @@
+# sendit - File Transfer Tool
+
+A beautiful, command-line SCP file transfer tool with a Casanovo-inspired help interface, real-time progress bars, and configuration management.
+
+## Features
+
+- 🚀 Simple and intuitive command-line interface
+- 🎨 Beautiful, colored help display that fits your terminal
+- 📊 **Real-time progress bars** showing transfer percentage and time remaining
+- ⚙️ **Configuration file** for storing default remote host/username
+- ⬆️ Upload files from local to remote servers
+- ⬇️ Download files from remote to local systems
+- 🔒 Secure transfers using SSH/SCP protocol
+- ✨ Progress indicators and clear status messages
+
+## Requirements
+
+- Python 3.8 or higher
+- OpenSSH (for `scp` command)
+- SSH access to remote servers
+
+## Installation
+
+### Method 1: Using pip (Recommended)
+
+```bash
+# Clone or download the repository
+cd sendit
+
+# Install the package
+pip install .
+
+# Or install in development mode
+pip install -e .
+```
+
+After installation, the `sendit` command will be available system-wide.
+
+### Method 2: Manual Installation
+
+```bash
+# Install dependencies
+pip install rich-click rich
+
+# Make the script executable
+chmod +x sendit.py
+
+# Create a symlink to make it available system-wide
+sudo ln -s $(pwd)/sendit.py /usr/local/bin/sendit
+```
+
+### Method 3: Direct Execution
+
+```bash
+# Install dependencies
+pip install rich-click rich
+
+# Run directly
+python sendit.py -h
+```
+
+## Configuration
+
+### Set Default Remote Host
+
+Configure a default remote host and username to simplify your commands:
+
+```bash
+sendit config set-host myserver.com myusername
+```
+
+After setting this, you can use simplified commands:
+
+```bash
+# Instead of: sendit -f myfile.txt -d user@server.com:/path/
+# You can use: sendit -f myfile.txt -d /path/
+```
+
+### View Configuration
+
+```bash
+sendit config show
+```
+
+### Clear Configuration
+
+```bash
+sendit config clear
+```
+
+### Configuration File Location
+
+The config file is stored at: `~/.config/sendit/config.ini`
+
+## Usage
+
+### View Help
+
+```bash
+sendit --help
+# or
+sendit -h
+```
+
+### Upload File to Remote Server
+
+```bash
+# With default remote configured
+sendit -f /path/to/local/file.txt -d /remote/path/
+
+# Without default remote (full specification)
+sendit -f /path/to/local/file.txt -d user@host:/remote/path/ -r
+
+# Short form
+sendit -f myfile.pdf -d user@server.com:/home/user/documents/
+```
+
+### Download File from Remote Server
+
+```bash
+# With default remote configured
+sendit -f /remote/path/file.txt -d ~/Downloads/ -l
+
+# Without default remote (full specification)
+sendit -f user@host:/remote/path/file.txt -d /local/path/ -l
+
+# Short form
+sendit -f user@server.com:/home/user/file.txt -d ~/Downloads/ -l
+```
+
+### Progress Bar
+
+During transfer, you'll see a beautiful progress bar with:
+- Spinner animation
+- Transfer description (Uploading/Downloading)
+- Progress bar (green when complete)
+- Percentage completed
+- Estimated time remaining
+
+Example output:
+```
+Uploading file...
+  Source:      /home/user/myfile.txt
+  Destination: user@server.com:/remote/path/
+
+⠋ Uploading ████████████████████░░░░░░░░░░░ 65% 0:00:15
+```
+
+### Check Version
+
+```bash
+sendit --version
+# or
+sendit -v
+```
+
+## Command Options
+
+### Main Commands
+
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--file` | `-f` | The file to transfer |
+| `--directory` | `-d` | The destination directory |
+| `--remote` | `-r` | Transfer from local to remote (upload) |
+| `--local` | `-l` | Transfer from remote to local (download) |
+| `--help` | `-h` | Show help message |
+| `--version` | `-v` | Show version information |
+
+### Configuration Commands
+
+| Command | Description |
+|---------|-------------|
+| `sendit config set-host HOST USER` | Set default remote host and username |
+| `sendit config show` | Display current configuration |
+| `sendit config clear` | Clear all configuration |
+
+## Examples
+
+### Example 1: First-time Setup
+
+```bash
+# Configure your default server
+sendit config set-host myserver.example.com john
+
+# Now upload files easily
+sendit -f ~/documents/report.pdf -d /home/john/documents/
+```
+
+### Example 2: Upload with Progress
+
+```bash
+sendit -f large-file.zip -d user@server.com:/backups/
+# Shows: ⠋ Uploading ████████████░░░░░░░░░░░░ 45% 0:01:23
+```
+
+### Example 3: Download Configuration File
+
+```bash
+sendit -f /etc/nginx/nginx.conf -d ~/backups/ -l
+```
+
+### Example 4: Quick Transfer Without Config
+
+```bash
+sendit -f myfile.txt -d user@192.168.1.100:/tmp/ -r
+```
+
+## SSH Configuration
+
+For easier usage, configure SSH keys and host aliases in `~/.ssh/config`:
+
+```
+Host myserver
+    HostName server.example.com
+    User myusername
+    IdentityFile ~/.ssh/id_rsa
+```
+
+Then combine with sendit config:
+
+```bash
+sendit config set-host myserver myusername
+sendit -f document.txt -d /home/myusername/files/
+```
+
+## Progress Bar Details
+
+The progress bar displays:
+- **Spinner**: Shows activity during transfer
+- **Description**: "Uploading" or "Downloading"
+- **Bar**: Visual representation of progress (turns green when complete)
+- **Percentage**: Exact completion percentage
+- **Time Remaining**: Estimated time to completion
+
+## Notes
+
+- The tool uses the system's `scp` command, so all SSH authentication methods (keys, passwords) are supported
+- Progress information is captured from SCP's verbose output
+- The destination directory must exist on the target system
+- For remote downloads with configured defaults, specify absolute paths starting with `/`
+- Configuration is stored per user in `~/.config/sendit/`
+
+## Troubleshooting
+
+### "scp command not found"
+
+Install OpenSSH:
+```bash
+sudo apt install openssh-client  # Ubuntu/Debian
+sudo dnf install openssh-clients  # Fedora
+```
+
+### "Permission denied"
+
+- Check your SSH keys are set up correctly
+- Verify you have write permissions on the destination
+- Ensure the remote directory exists
+
+### "No such file or directory"
+
+- For uploads: Check the local file path exists
+- For downloads: Check the remote file path is correct
+- Verify the destination directory exists
+
+### Progress bar not showing
+
+- The progress bar requires SCP to output transfer information
+- Some systems may have different SCP output formats
+- The basic transfer will still work even if progress parsing fails
+
+### Configuration not working
+
+- Check the config file at `~/.config/sendit/config.ini`
+- Run `sendit config show` to verify settings
+- Ensure paths are absolute when using default remote
+
+## License
+
+MIT License - See LICENSE file for details
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Changelog
+
+### v1.1.0
+- ✨ Added real-time progress bar with percentage and time remaining
+- ⚙️ Added configuration file support for default remote host/username
+- 🎨 Improved command structure with subcommands
+- 📝 Enhanced documentation
+
+### v1.0.0
+- 🎉 Initial release
+- Basic SCP file transfer functionality
+- Casanovo-style help interface

@@ -1,0 +1,9 @@
+README.md
+sendit.py
+setup.py
+sendit.egg-info/PKG-INFO
+sendit.egg-info/SOURCES.txt
+sendit.egg-info/dependency_links.txt
+sendit.egg-info/entry_points.txt
+sendit.egg-info/requires.txt
+sendit.egg-info/top_level.txt

@@ -1,0 +1,82 @@
+%YAML 1.3
+---
+# Key remappings
+- Key: [Page Up, pressed]
+- KeyPress:
+  - underscore
+  - click
+...
+---
+- Key: [Page Down, pressed]
+- KeyPress:
+  - [Alt_L, minus]
+  - click
+...
+---
+- Key: [Snipping Tool, pressed]
+- KeyPress:
+  - Print
+  - click
+...
+---
+- Key: [Mute Fn, pressed]
+- KeyPress:
+  - [Control_L, Shift_L, m]
+  - click
+...
+---
+- Key: [Forward Button, pressed]
+- KeyPress:
+  - [Control_L, Shift_L, v]
+  - click
+...
+---
+- Key: [Back Button, pressed]
+- KeyPress:
+  - [Control_L, c]
+  - click
+...
+---
+- Key: [Middle Button, pressed]
+- KeyPress:
+  - Return
+  - click
+...
+---
+- Key: [Smart Shift, pressed]
+- KeyPress:
+  - [Control_L, KP_Enter]
+  - click
+...
+---
+- Key: [Mouse Gesture Button, pressed]
+- KeyPress:
+  - [Alt_L, Tab]
+  - click
+...
+---
+- Active: D72F72ED
+- Test: [thumb_wheel_up, 5]
+- KeyPress:
+  - [Shift_L, XF86_AudioRaiseVolume]
+  - click
+...
+---
+- Active: D72F72ED
+- Test: [thumb_wheel_down, 5]
+- KeyPress:
+  - [Shift_L, XF86_AudioLowerVolume]
+  - click
+...
+---
+- Key: [Volume Down Fn, released]
+- KeyPress:
+  - [Control_L, ampersand]
+  - click
+...
+---
+- Key: [Volume Up Fn, released]
+- KeyPress:
+  - [Control_L, eacute]
+  - click
+...
