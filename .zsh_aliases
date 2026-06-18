@@ -1,0 +1,68 @@
+##### ea - alias for editing aliases
+#
+# When setting up a new aliases file, or after creating a new file, source it.
+# This alias makes editing aliases a bit easier and they are useful right away.
+# Note: if the source fails, it will not echo "aliases sourced".
+#
+alias ea='nvim ~/.zsh_aliases; source ~/.zsh_aliases && echo "aliases sourced  --ok."'
+#
+## clear console
+alias c='clear'
+## get rid of command not found ##
+alias cd..='cd ..'
+ 
+## a quick way to get out of current directory ##
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+## Colorize the grep command output for ease of use (good for log files) ##
+alias grep='grep -i --color=auto'
+alias egrep='egrep -i --color=auto'
+alias fgrep='fgrep -i --color=auto'
+alias h='history'
+alias now='date +"%T"'
+alias nowtime=now
+# show open ports
+alias ports='netstat -tulanp'
+# install with apt-get
+alias apt-get="sudo apt-get"
+# become root #
+alias root='sudo -i'
+alias su='sudo -i'
+ 
+## pass options to free ##
+alias meminfo='free -m -l -t'
+ 
+## get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+ 
+## get top process eating cpu ##
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+ 
+## Get server cpu info ##
+alias cpuinfo='lscpu'
+## set some other defaults ##
+alias df='df -H'
+alias du='du -ch --max-depth 1'
+ 
+# top is atop, just like vi is vim
+alias top='atop'
+## shortcut to PHD
+alias phd='cd $HOME/Documents/drive_UCL/PHD/'
+## shortcut to Moodle course
+alias moodle='cd $HOME/Documents/drive_UCL/PHD/courses/LINFO2262/'
+## shortcut for openvpn
+alias startvpn='openvpn3 session-start -c $HOME/Documents/drive_UCL/vpn/profile-30975.ovpn'
+## shortcut for ssh tower connection
+alias tower='ssh gdeflandre@130.104.74.165'
+## shortcut for ssh rserver connection
+alias rserver='ssh deflandreg@cbio-rstudio.icp.ucl.ac.be'
+## shortcut for solaar config
+alias solaarconfig='cp $HOME/Documents/drive_perso/scripts/solaar/config.yaml ~/.config/solaar/'
+## shortcut vi is nvim
+alias vi='nvim'
+## shortcut to activate linfo_env
+alias linfo='source $HOME/Documents/drive_UCL/PHD/courses/LINFO2262/linfo_env/bin/activate'

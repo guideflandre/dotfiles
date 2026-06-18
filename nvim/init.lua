@@ -18,5 +18,5 @@ vim.opt.rtp:prepend(lazypath)
 
 require("vim-options")
 require("lazy").setup("plugins")
-
-
+require('text-wrap')
+vim.opt.textwidth = 79
