@@ -4,24 +4,8 @@
 ;; sync' after modifying this file!
 
 ;; Change welcome banner
-(after! doom-dashboard
-  (defun my-doom-banner ()
-    (let* ((banner '(" ██████╗██████╗ ██╗ ██████╗ "
-                     "██╔════╝██╔══██╗██║██╔═══██╗"
-                     "██║     ██████╔╝██║██║   ██║"
-                     "██║     ██╔══██╗██║██║   ██║"
-                     "╚██████╗██████╔╝██║╚██████╔╝"
-                     " ╚═════╝╚═════╝ ╚═╝ ╚═════╝ "))
-           (longestLine (apply #'max (mapcar #'length banner))))
-      (put-text-property
-       (point)
-       (dolist (line banner (point))
-         (insert (+doom-dashboard--center
-                  +doom-dashboard--width line)
-                 "\n"))
-       'face 'doom-dashboard-banner)))
-
-  (setq +doom-dashboard-ascii-banner-fn #'my-doom-banner))
+;; (setq fancy-splash-image "~/Documents/drive_UCL/PHD/lab-meetings/labLogo/demacsDash.png")
+(setq fancy-splash-image "~/Pictures/wallpaper/asianSmall.png")
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
@@ -118,6 +102,17 @@
   (map! :map ess-r-mode-map
         :i "M--" #'ess-insert-assign
         :i "C-S-m" (cmd! (insert " |> "))))
+
+;; set python similar to R run file with C-ENTER
+(defun send-line-to-python ()
+  "Send current line to Python REPL."
+  (interactive)
+  (python-shell-send-region
+    (line-beginning-position)
+    (line-end-position)))
+
+(map! :map python-mode-map
+      :ni "C-<return>" #'send-line-to-python)
 
 ;; Set 80 chars max and apply M-q
 (setq-default fill-column 80)
