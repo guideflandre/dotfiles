@@ -1,7 +1,6 @@
 # Why this repo ? 
 
-My dotfiles are... useful for when setting up a new ubuntu pc. Also I love
-`nvim`.
+My dotfiles are... useful for when setting up a new ubuntu pc.
 
 ## What should you install ?
 
@@ -9,6 +8,7 @@ The dotfiles in this repo are simple config files to your tastes. When setting
 up a new ubuntu pc, you should at the very least install the following:
 
 - [ ] Chrome
+- [ ] emacs and doom emacs !!!
 - [ ]  kitty
 - [ ] zsh and oh-my-zsh
 - [ ] nvim
